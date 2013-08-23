@@ -1,0 +1,27 @@
+{
+  "name": "ludum-dare-27",
+  "version": "0.0.0",
+  "description": "Ludum Dare 27 entry",
+  "main": "server.js",
+  "dependencies": {
+    "ecstatic": "~0.4.7",
+    "browserify": "~2.28.0",
+    "optimist": "~0.6.0",
+    "open": "0.0.4",
+    "auth-socket": "~0.2.3",
+    "level": "~0.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browserify client.js > www/bundle.js && node server.js --debug",
+    "deploy": "browserify client.js | uglifyjs | gzip > www/bundle.js.gz && node server.js"
+  },
+  "keywords": [
+    "ludum",
+    "dare",
+    "27"
+  ],
+  "author": "Mikola Lysenko",
+  "license": "MIT"
+}
