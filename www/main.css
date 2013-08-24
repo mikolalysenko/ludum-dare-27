@@ -28,7 +28,6 @@ html,body {
 
 #leftpane {
   position: absolute;
-  bg-color: red;
   width: 33%;
   top: 0;
   bottom: 0;
@@ -37,7 +36,6 @@ html,body {
 
 #centerpane {
   position: absolute;
-  bg-color: green;
   left: 33%;
   right: 33%;
   top: 0;
@@ -46,7 +44,6 @@ html,body {
 
 #rightpane {
   position: absolute;
-  bg-color: blue;
   width: 33%;
   right: 0;
   top: 0;
@@ -105,7 +102,6 @@ html,body {
 }
 
 .chatUser {
-  font-style: bold;
   color: red;
   display: inline;
   margin: 3px;

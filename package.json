@@ -14,7 +14,9 @@
     "leveljs": "0.0.0-a1",
     "level-sublevel": "~5.0.1",
     "levelup": "~0.14.0",
-    "doorknob": "~2.0.2"
+    "doorknob": "mikolalysenko/doorknob",
+    "parsed-url": "0.0.0",
+    "leveldown": "~0.7.0"
   },
   "devDependencies": {
     "ws": "~0.4.29"
@@ -22,7 +24,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "browserify client.js --debug > www/bundle.js && node server.js --debug",
-    "deploy": "browserify client.js | uglifyjs | gzip > www/bundle.js.gz && node server.js"
+    "deploy": "browserify client.js --debug > www/bundle.js && node server.js"
   },
   "keywords": [
     "ludum",

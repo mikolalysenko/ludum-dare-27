@@ -28,8 +28,7 @@ context.fillRect(0, 0, 800, 800)
 
 function checkState() {
   request({url: "/_profile", json: true}, function(err, resp, profile) {
-    console.log(profile)
-    if(profile) {
+    if(!profile.loggedOut) {
       if(localUser.loggedIn) {
         return
       }
@@ -105,8 +104,8 @@ chatBox.addEventListener("keydown", function(evt) {
   if(evt.keyCode === 13) {
     var str = chatBox.value
     chatBox.value = ""
-    if(socket) {
-      socket.send(['{"chat":"', str.replace(/\\/g, "\\\\").replace(/"/g, "\\\""), '"}'].join(""))
+    if(localUser.socket) {
+      localUser.socket.send(['{"chat":"', str.replace(/\\/g, "\\\\").replace(/"/g, "\\\""), '"}'].join(""))
     }
   }
 })

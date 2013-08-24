@@ -36,7 +36,7 @@ var doorknob = DoorknobServer({
   port:           portnum,
   closeAnonymous: true,
   db:             accountDB,
-  audience:       args.audience,
+  audience:       { audience: args.audience, prefix: "/_profile" },
   staticPath:     __dirname + "/www",
   devMode:        args.debug,
   cache:          args.debug ? 10 : 3600
