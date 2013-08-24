@@ -53,6 +53,7 @@ function checkState() {
           textNode.appendChild(userNode)
           textNode.appendChild(chatNode)
           chatLog.appendChild(textNode)
+          chatLog.scrollTop = chatLog.scrollHeight
         }
         console.log("DATA", data)
       }
