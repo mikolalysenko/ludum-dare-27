@@ -4,6 +4,7 @@ var WebSocket   = require("ws")()
 var request     = require("browser-request")
 var persona     = require("persona-id")({ route: "/_profile" })
 var parsedURL   = require("parsed-url")
+var game        = require("./lib/game.js")
 
 var loginStatus = document.getElementById("loginmsg")
 var identify    = document.getElementById("identify")
@@ -13,18 +14,24 @@ var betAmount   = document.getElementById("betamount")
 var betLeft     = document.getElementById("betleft")
 var betRight    = document.getElementById("betright")
 var canvas      = document.getElementById("gamefield")
+var editorPage  = document.getElementById("editorpage")
 
 var context     = canvas.getContext("2d")
+
+//Remove editor page from main page
+document.body.removeChild(editorPage)
+editorPage.style.display = "block"
+
+var game        = new game.Game(500, 500)
+game.setContext(context)
 
 var localUser = {
   loggedIn: false,
   email: "",
   socket: null,
-  dollars: 0
+  dollars: 0,
+  gladiators: []
 }
-
-context.fillStyle = "rgba(0,0,0,1.0)"
-context.fillRect(0, 0, 800, 800)
 
 function checkState() {
   request({url: "/_profile", json: true}, function(err, resp, profile) {
@@ -58,7 +65,8 @@ function checkState() {
           chatLog.appendChild(textNode)
           chatLog.scrollTop = chatLog.scrollHeight
         } else if(parsed.status) {
-          localUser.dollars = parsed.dollars|0
+          var stats = parsed.status
+          localUser.dollars = stats.dollars|0
         }
         console.log("DATA", data)
       }
@@ -110,5 +118,10 @@ chatBox.addEventListener("keydown", function(evt) {
   }
 })
 
+function drawGame() {
+  requestAnimationFrame(drawGame)
+  game.draw()
+}
+drawGame()
 
 checkState()

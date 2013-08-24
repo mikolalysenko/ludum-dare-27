@@ -16,7 +16,8 @@
     "levelup": "~0.14.0",
     "doorknob": "mikolalysenko/doorknob",
     "parsed-url": "0.0.0",
-    "leveldown": "~0.7.0"
+    "leveldown": "~0.7.0",
+    "box2dweb-commonjs": "~2.1.0"
   },
   "devDependencies": {
     "ws": "~0.4.29"
