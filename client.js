@@ -2,7 +2,7 @@
 
 var WebSocket   = require("ws")
 var request     = require("browser-request")
-var persona     = require("persona-id")({ route: "_profile" })
+var persona     = require("persona-id")({ route: "/_profile" })
 var parsedURL   = require("parsed-url")
 
 var identify = document.getElementById("identify")

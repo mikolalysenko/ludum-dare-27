@@ -1,10 +1,13 @@
 "use strict"
 
-var level       = require("level")
-var url         = require("url")
-var authSocket  = require("auth-socket")
-var optimist    = require("optimist")
-var open        = require("open")
+var level             = require("level")
+var url               = require("url")
+var authSocket        = require("auth-socket")
+var optimist          = require("optimist")
+var open              = require("open")
+
+var createCasino      = require("./lib/casino.js")
+var createConnection  = require("./lib/connection.js")
 
 //Parse arguments
 var args = optimist
@@ -18,6 +21,9 @@ var args = optimist
 //Create database instances
 var stateDB = level(args.statePath)
 var accountDB = level(args.accountPath)
+
+//Create the casino
+var casino = createCasino()
 
 //Create server
 var portnum = args.port|0
@@ -33,7 +39,13 @@ var authServer = authSocket({
 
 //Handle a socket connection
 function handleConnection(req, socket, head) {
-  console.log(req.url, socket)
+  authServer.httpServer.doorknob.getProfile(req, function(err, profile) {
+    if(err) {
+      console.error("not logged in: ", err)
+      return
+    }
+    console.log(profile, socket)
+  })
 }
 
 //Listen
