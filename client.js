@@ -31,6 +31,12 @@ function checkState() {
       }
       
       socket.onmessage = function(data, flags) {
+        var parsed = JSON.parse(data.data)
+        if(parsed.chat) {
+          var textNode = document.createElement("p")
+          textNode.appendChild(document.createTextNode(parsed.user + ":" + parsed.chat))
+          chatLog.appendChild(textNode)
+        }
         console.log("DATA", data)
       }
       
