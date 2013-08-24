@@ -27,7 +27,8 @@ var authServer = authSocket({
   db:             accountDB,
   audience:       args.audience,
   staticPath:     __dirname + "/www",
-  devMode:        args.debug
+  devMode:        args.debug,
+  cache:          args.debug ? 1 : 3600
 }, handleConnection)
 
 //Handle a socket connection

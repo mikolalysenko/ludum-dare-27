@@ -6,6 +6,7 @@
   "dependencies": {
     "ecstatic": "~0.4.7",
     "browserify": "~2.28.0",
+    "browser-request": "iriscouch/browser-request.git",
     "optimist": "~0.6.0",
     "open": "0.0.4",
     "auth-socket": "~0.2.3",
@@ -13,13 +14,14 @@
     "persona-id": "0.0.3",
     "leveljs": "0.0.0-a1",
     "level-sublevel": "~5.0.1",
-    "levelup": "~0.14.0",
-    "browser-request": "~0.2.1"
+    "levelup": "~0.14.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ws": "~0.4.29"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "browserify client.js > www/bundle.js && node server.js --debug",
+    "start": "browserify client.js --debug > www/bundle.js && node server.js --debug",
     "deploy": "browserify client.js | uglifyjs | gzip > www/bundle.js.gz && node server.js"
   },
   "keywords": [
