@@ -9,12 +9,12 @@
     "browser-request": "iriscouch/browser-request.git",
     "optimist": "~0.6.0",
     "open": "0.0.4",
-    "auth-socket": "~0.2.3",
     "level": "~0.14.0",
     "persona-id": "0.0.3",
     "leveljs": "0.0.0-a1",
     "level-sublevel": "~5.0.1",
-    "levelup": "~0.14.0"
+    "levelup": "~0.14.0",
+    "doorknob": "~2.0.2"
   },
   "devDependencies": {
     "ws": "~0.4.29"
