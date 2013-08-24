@@ -1,6 +1,256 @@
-#chatbar{
+html,body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+#loginmsg {
+  display: inline;
+}
+
+#toppane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5%;
+}
+
+#vcenterwrapper {
+  position: absolute;
+  top: 5%;
+  bottom: 23%;
+  left: 0;
+  right: 0;
+}
+
+#leftpane {
+  position: absolute;
+  bg-color: red;
+  width: 33%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#centerpane {
+  position: absolute;
+  bg-color: green;
+  left: 33%;
+  right: 33%;
+  top: 0;
+  bottom: 0;
+}
+
+#rightpane {
+  position: absolute;
+  bg-color: blue;
+  width: 33%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#bottompane {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  text-align: center;
+  background-color: rgba(255,255,255,255);
+}
+
+#topleftwrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  text-align: left;
+  padding: 5px;
+}
+
+#toprightwrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  text-align: right;
+  padding: 5px;
+}
+
+#mutebutton {
+  
+}
+
+
+#chatlog{
+  position: absolute;
   overflow: scroll;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 22px;
 }
 
 #chatbox {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+}
+
+.chatItem {
+}
+
+.chatUser {
+  font-style: bold;
+  color: red;
+  display: inline;
+  margin: 3px;
+}
+
+.betleft {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
+	box-shadow:inset 0px 1px 0px 0px #f5978e;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f) );
+	background:-moz-linear-gradient( center top, #f24537 5%, #c62d1f 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f');
+	background-color:#f24537;
+	-webkit-border-top-left-radius:37px;
+	-moz-border-radius-topleft:37px;
+	border-top-left-radius:37px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:37px;
+	-moz-border-radius-bottomright:37px;
+	border-bottom-right-radius:37px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0px;
+	border:1px solid #d02718;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	font-weight:bold;
+	font-style:normal;
+	height:80px;
+	line-height:80px;
+	width:200px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:3px 2px 6px #810e05;
+}
+.betleft:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537) );
+	background:-moz-linear-gradient( center top, #c62d1f 5%, #f24537 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537');
+	background-color:#c62d1f;
+}.betleft:active {
+	position:relative;
+	top:1px;
+}
+
+.betright {
+	-moz-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #4197ee) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #4197ee 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#4197ee');
+	background-color:#79bbff;
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:37px;
+	-moz-border-radius-topright:37px;
+	border-top-right-radius:37px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:37px;
+	-moz-border-radius-bottomleft:37px;
+	border-bottom-left-radius:37px;
+	text-indent:0px;
+	border:1px solid #469df5;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	font-weight:bold;
+	font-style:normal;
+	height:80px;
+	line-height:80px;
+	width:200px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:3px 2px 6px #287ace;
+}
+.betright:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4197ee), color-stop(1, #79bbff) );
+	background:-moz-linear-gradient( center top, #4197ee 5%, #79bbff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4197ee', endColorstr='#79bbff');
+	background-color:#4197ee;
+}.betright:active {
+	position:relative;
+	top:1px;
+}
+
+#betcontainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#gamefield {
+  width: 100%;
+}
+
+#betleftcontainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 40%;
+  padding: 10px;
+}
+
+
+#betcentercontainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40%;
+  right: 40%;
+  padding: 10px;
+}
+
+#betrightcontainer {
+  position: absolute;
+  left: 40%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+}
+
+#betfunds {
+  display: inline;
+}
+
+#betodds {
+  display: inline;
+}
+
+#betamount {
+  text-align: right;
 }

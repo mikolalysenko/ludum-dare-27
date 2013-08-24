@@ -5,13 +5,23 @@ var request     = require("browser-request")
 var persona     = require("persona-id")({ route: "/_profile" })
 var parsedURL   = require("parsed-url")
 
+var loginStatus = document.getElementById("loginmsg")
 var identify    = document.getElementById("identify")
 var chatLog     = document.getElementById("chatlog")
 var chatBox     = document.getElementById("chatbox")
+var betAmount   = document.getElementById("betamount")
+var betLeft     = document.getElementById("betleft")
+var betRight    = document.getElementById("betright")
+var canvas      = document.getElementById("gamefield")
+
+var context     = canvas.getContext("2d")
 
 var loggedIn = false
 var email = ""
 var socket = null
+
+context.fillStyle = "rgba(0,0,0,1.0)"
+context.fillRect(0, 0, 800, 800)
 
 function checkState() {
   request({url: "/_profile", json: true}, function(err, resp, profile) {
@@ -25,6 +35,7 @@ function checkState() {
       socket = new WebSocket("ws://" + parsedURL.host)
       chatBox.disabled = false
       identify.value = "unidentify"
+      loginStatus.innerHTML = "Logged in as " + email
       
       socket.onopen = function() {
         console.log("SOCKET OPEN")
@@ -34,7 +45,13 @@ function checkState() {
         var parsed = JSON.parse(data.data)
         if(parsed.chat) {
           var textNode = document.createElement("p")
-          textNode.appendChild(document.createTextNode(parsed.user + ":" + parsed.chat))
+          textNode.className = "chatItem"
+          var userNode = document.createElement("div")
+          userNode.appendChild(document.createTextNode(parsed.user))
+          userNode.className = "chatUser"
+          var chatNode = document.createTextNode(parsed.chat)
+          textNode.appendChild(userNode)
+          textNode.appendChild(chatNode)
           chatLog.appendChild(textNode)
         }
         console.log("DATA", data)
@@ -55,6 +72,7 @@ function checkState() {
       socket = null
       identify.value = "identify"
       chatBox.disabled = true
+      loginStatus.innerHTML = "Not logged in"
     }
   })
 }
