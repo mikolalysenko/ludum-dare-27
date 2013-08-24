@@ -16,9 +16,12 @@ var canvas      = document.getElementById("gamefield")
 
 var context     = canvas.getContext("2d")
 
-var loggedIn = false
-var email = ""
-var socket = null
+var localUser = {
+  loggedIn: false,
+  email: "",
+  socket: null,
+  dollars: 0
+}
 
 context.fillStyle = "rgba(0,0,0,1.0)"
 context.fillRect(0, 0, 800, 800)
@@ -27,15 +30,16 @@ function checkState() {
   request({url: "/_profile", json: true}, function(err, resp, profile) {
     console.log(profile)
     if(profile) {
-      if(loggedIn) {
+      if(localUser.loggedIn) {
         return
       }
-      loggedIn = true
-      email = profile.email
-      socket = new WebSocket("ws://" + parsedURL.host)
+      localUser.loggedIn = true
+      localUser.email = profile.email
+      var socket = new WebSocket("ws://" + parsedURL.host)
+      localUser.socket = socket
       chatBox.disabled = false
-      identify.value = "unidentify"
-      loginStatus.innerHTML = "Logged in as " + email
+      identify.innerHTML = "Log out"
+      loginStatus.innerHTML = "Logged in as " + localUser.email
       
       socket.onopen = function() {
         console.log("SOCKET OPEN")
@@ -54,6 +58,8 @@ function checkState() {
           textNode.appendChild(chatNode)
           chatLog.appendChild(textNode)
           chatLog.scrollTop = chatLog.scrollHeight
+        } else if(parsed.status) {
+          localUser.dollars = parsed.dollars|0
         }
         console.log("DATA", data)
       }
@@ -62,16 +68,17 @@ function checkState() {
         console.log("SOCKET ERROR", evt)
       }
     } else {
-      if(socket) {
-        socket.close()
+      if(localUser.socket) {
+        localUser.socket.close()
       }
-      if(!loggedIn) {
+      if(!localUser.loggedIn) {
         return
       }
-      loggedIn = false
-      email = ""
-      socket = null
-      identify.value = "identify"
+      localUser.loggedIn = false
+      localUser.email = ""
+      localUser.socket = null
+      localUser.dollars = 0
+      identify.innerHTML = "Log in"
       chatBox.disabled = true
       loginStatus.innerHTML = "Not logged in"
     }
@@ -87,7 +94,7 @@ persona.on("logout", function() {
 })
 
 identify.addEventListener("click", function () {
-  if(loggedIn) {
+  if(localUser.loggedIn) {
     persona.unidentify()
   } else {
     persona.identify()
