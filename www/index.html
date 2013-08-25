@@ -19,7 +19,7 @@
       <div id="vcenterwrapper">
         <div id="leftpane">
           <div id="roster">
-            <a href="#">Create new gladiator</a>
+            <a href="#" id="creategladiator">Create new robot</a>
             <div id="gladiatorlist">
             </div>
           </div>
@@ -58,6 +58,22 @@
       </div>
     </div>
     <div id="editorpage">
+      <a href="#" id="closeeditor">Close editor</a>
+      <label for="edittool">Tool</label>
+      <select id="toolselect">
+        <option value="move">Move</option>
+        <option value="delete">Delete</option>
+        <option value="box">Box</option>
+        <option value="joint">Joint</option>
+      </select>
+      <div id="toolparameters">
+      </div>
+      <label for="enablephysics">Enable physics</label>
+      <input type="checkbox" id="enablephysics">
+      <div>
+        Cost of gladiator $<div id="gladiatorcost">0</div>
+      </div>
+      <canvas id="editorcanvas" width=500 height=500>
     </div>
     <script src="/bundle.js" type="text/javascript"></script>
   </body>

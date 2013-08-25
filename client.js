@@ -1,29 +1,23 @@
 "use strict"
 
-var WebSocket   = require("ws")()
-var request     = require("browser-request")
-var persona     = require("persona-id")({ route: "/_profile" })
-var parsedURL   = require("parsed-url")
-var game        = require("./lib/game.js")
+var WebSocket     = require("ws")()
+var request       = require("browser-request")
+var persona       = require("persona-id")({ route: "/_profile" })
+var parsedURL     = require("parsed-url")
+var game          = require("./lib/game.js")
+var createEditor  = require("./lib/editor.js")
 
-var loginStatus = document.getElementById("loginmsg")
-var identify    = document.getElementById("identify")
-var chatLog     = document.getElementById("chatlog")
-var chatBox     = document.getElementById("chatbox")
-var betAmount   = document.getElementById("betamount")
-var betLeft     = document.getElementById("betleft")
-var betRight    = document.getElementById("betright")
-var canvas      = document.getElementById("gamefield")
-var editorPage  = document.getElementById("editorpage")
+var loginStatus   = document.getElementById("loginmsg")
+var identify      = document.getElementById("identify")
+var chatLog       = document.getElementById("chatlog")
+var chatBox       = document.getElementById("chatbox")
+var betAmount     = document.getElementById("betamount")
+var betLeft       = document.getElementById("betleft")
+var betRight      = document.getElementById("betright")
+var canvas        = document.getElementById("gamefield")
+var createButton  = document.getElementById("creategladiator")
 
 var context     = canvas.getContext("2d")
-
-//Remove editor page from main page
-document.body.removeChild(editorPage)
-editorPage.style.display = "block"
-
-var game        = new game.Game(500, 500)
-game.setContext(context)
 
 var localUser = {
   loggedIn: false,
@@ -32,6 +26,11 @@ var localUser = {
   dollars: 0,
   gladiators: []
 }
+
+var editor = createEditor(localUser)
+
+var game        = new game.Game(500, 500)
+game.setContext(context)
 
 function checkState() {
   request({url: "/_profile", json: true}, function(err, resp, profile) {
@@ -116,6 +115,10 @@ chatBox.addEventListener("keydown", function(evt) {
       localUser.socket.send(['{"chat":"', str.replace(/\\/g, "\\\\").replace(/"/g, "\\\""), '"}'].join(""))
     }
   }
+})
+
+createButton.addEventListener("click", function() {
+  editor.open()
 })
 
 function drawGame() {
