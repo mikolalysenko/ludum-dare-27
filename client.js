@@ -30,8 +30,8 @@ var localUser = {
 
 var editor = createEditor(localUser)
 
-var game        = new game.Game(500, 500)
-game.setContext(context)
+var game        = new game.Game(1000, 1000)
+game.setContext(context, 0.5)
 
 function checkState() {
   request({url: "/_profile", json: true}, function(err, resp, profile) {
@@ -72,8 +72,21 @@ function checkState() {
           for(var i=0; i<localUser.gladiators.length; ++i) {
             var g = localUser.gladiators[i]
             var item = document.createElement("div")
+            item.className = "gladiatorItem"
             item.appendChild(document.createTextNode(g.name))
+          
+            var battleButton = document.createElement("a")
+            battleButton.appendChild(document.createTextNode("Fight!"))
+            battleButton.className = "gladiatorButton"
+            battleButton.addEventListener("click", battleGladiator.bind(undefined, g))
+            item.appendChild(battleButton)
+          
             gladiatorList.appendChild(item)
+          }
+        } else if(parsed.state) {
+          if(parsed.state === "wait") {
+          } else if(parsed.state === "bet") {
+          } else if(parsed.state === "fight") {
           }
         }
         console.log("DATA", data)
@@ -96,8 +109,22 @@ function checkState() {
       identify.innerHTML = "Log in"
       chatBox.disabled = true
       loginStatus.innerHTML = "Not logged in"
+      gladiatorList.innerHTML = ""
     }
   })
+}
+
+//Sends a gladiator to fight
+function battleGladiator(gladiator) {
+  if(localUser.socket) {
+    if(gladiator.cost > localUser.dollars) {
+      alert("Insufficient funds for battle!")
+      return
+    }
+    if(confirm("Are you sure you want to send " + gladiator.name + " to battle?  Cost $" + gladiator.cost)) {
+      localUser.socket.send(JSON.stringify({fighter: gladiator.name}))
+    }
+  }
 }
 
 persona.on("login", function(id) {
