@@ -17,7 +17,7 @@
     "doorknob": "mikolalysenko/doorknob",
     "parsed-url": "0.0.0",
     "leveldown": "~0.7.0",
-    "box2dweb": "~2.1.0a",
+    "box2dweb": "~2.1.0b",
     "dom.position": "0.0.0"
   },
   "devDependencies": {

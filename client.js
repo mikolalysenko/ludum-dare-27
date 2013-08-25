@@ -16,6 +16,7 @@ var betLeft       = document.getElementById("betleft")
 var betRight      = document.getElementById("betright")
 var canvas        = document.getElementById("gamefield")
 var createButton  = document.getElementById("creategladiator")
+var gladiatorList = document.getElementById("gladiatorlist")
 
 var context     = canvas.getContext("2d")
 
@@ -66,6 +67,14 @@ function checkState() {
         } else if(parsed.status) {
           var stats = parsed.status
           localUser.dollars = stats.dollars|0
+          localUser.gladiators = stats.gladiators
+          gladiatorList.innerHTML = ""
+          for(var i=0; i<localUser.gladiators.length; ++i) {
+            var g = localUser.gladiators[i]
+            var item = document.createElement("div")
+            item.appendChild(document.createTextNode(g.name))
+            gladiatorList.appendChild(item)
+          }
         }
         console.log("DATA", data)
       }
